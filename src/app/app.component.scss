@@ -1,0 +1,67 @@
+@import 'theme';
+
+:host {
+    display: flex; /* displays flex-items (children) inline */
+    flex-direction: column; /* stacks them vertically */
+    height: 100%; /* needs to take the parents height, alternative: body {display: flex} */
+
+    .content-wrapper {
+       
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        flex: 1;
+        overflow: auto;
+        background-image: url('../assets/svg/curve_bg.svg');
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position-y: -2px;
+
+        @media screen and (max-width: 1087px) {
+            @media screen and (orientation:portrait) {
+                // padding-bottom: 12px;
+                background-image: url('../assets/svg/curve_bg_mobile.svg');
+            }
+        }
+        @include until($tablet) {
+            @media screen and (orientation:portrait) {
+                background-image: url('../assets/svg/curve_bg_mobile.svg');
+            }
+        }
+
+
+        .top {
+            // height: 100%;
+            // min-height: calc(100% - 160px);
+            width: 100%;
+            padding: 24px 22px;
+            margin-bottom: 16px;
+            // display: flex;
+            // flex-direction: column;
+            // align-items: center;
+            header {
+                margin: 12px 0;
+                text-align: center;
+
+                @include until($tablet) {
+                    margin: 0;
+                }
+                img {
+                    width: 280px;
+
+                    @include until($tablet) {
+                        width: 240px;
+                    }
+                }
+                svg {
+                    width: 240px;
+
+                    @include until($tablet) {
+                        width: 180px;
+                    }
+                }
+            }
+        }
+    }
+
+}

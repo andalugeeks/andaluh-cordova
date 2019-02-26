@@ -1,0 +1,25 @@
+{
+    "MENU": {
+        "ONE": "Home",
+        "TWO": "Who we are",
+        "THREE": "Contact",
+        "FOUR": "Repository"
+    },
+    "FOOTER": {
+        "NEWSLETTER": {
+            "HEADLINE": "Newsletter",
+            "MSG": "Subscribe our Newsletter. We will only use it for important stuff, promise not to be annoying :)",
+            "BTN": "Subscribe"
+        },
+        "SOCIAL": {
+            "HEADLINE": "Social networks",
+            "MSG": "Follow us if you want to be updated with the latest!"
+        },
+        "OPEN_SOURCE": {
+            "HEADLINE": "GitHub",
+            "MSG": "We are Open Source! We publish our source code in GitHub, where you can have a look at our different projects and follow what we do."
+        }
+    },
+    "ES": "spanish",
+    "AND": "andalûh"
+}

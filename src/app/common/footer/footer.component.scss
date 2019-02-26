@@ -1,0 +1,32 @@
+@import 'theme.scss';
+:host {
+  display: flex;
+  flex: 1; 
+  width: 100%;
+
+  justify-content: center;
+  background-color: $colorPrimary;  
+
+  .block.content {
+    flex: 1;
+    padding: 24px 28px 0;
+    color: $colorWhite;
+
+    a {
+      color: $colorWhite;
+
+      img {
+        max-width: 54px;
+      }
+    }
+  
+    h1, h2, h3 {
+      color: $lightGreen;
+      margin-bottom: 0.28em;
+    }
+  }
+
+  @media screen and (max-width: 1087px) {
+    flex-direction: column;
+  }
+}
