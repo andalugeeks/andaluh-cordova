@@ -2,9 +2,9 @@
  * Copyleft (c) 2018-2019 Andalugeeks
  * 
  * Authors:
+ * - Eduardo Amador <eamadorpaton@gmail.com>
  * - Ksar Feui <a.moreno.losana@gmail.com>
  * - J. Félix Ontañón <felixonta@gmail.com>
- * - Eduardo Amador <eamadorpaton@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
