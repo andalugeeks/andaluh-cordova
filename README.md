@@ -1,6 +1,6 @@
 # Andaluh-cordova
 
-Transliterate español (spanish) spelling to andaluz web transcriptor.
+Transliterate español (spanish) spelling to andaluz app transcriptor.
 
 
 ## Table of Contents
@@ -14,14 +14,16 @@ Transliterate español (spanish) spelling to andaluz web transcriptor.
 
 The **Andalusian varieties of [Spanish]** (Spanish: *andaluz*; Andalusian) are spoken in Andalusia, Ceuta, Melilla, and Gibraltar. They include perhaps the most distinct of the southern variants of peninsular Spanish, differing in many respects from northern varieties, and also from Standard Spanish. Further info: https://en.wikipedia.org/wiki/Andalusian_Spanish.
 
-This app uses the [Andaluh-js](https://github.com/andalugeeks/andaluh-js) & [Andaluh-api](https://github.com/andalugeeks/andaluh-api), for further info about transliteration functions to convert *español* (spanish) spelling to andaluz p
+This app uses the [Andaluh-js](https://github.com/andalugeeks/andaluh-js), for further info about transliteration functions to convert *español* (spanish) spelling to andaluz p
 
-As there's no official or standard andaluz spelling, andaluh-py is adopting the **EPA proposal (Er Prinzipito Andaluh)**. Further info: https://andaluhepa.wordpress.com. Other andaluz spelling proposals are planned to be added as well.
+As there's no official or standard andaluz spelling, andaluh-py & andaluh-js is adopting the **EPA proposal (Er Prinzipito Andaluh)**. Further info: https://andaluhepa.wordpress.com. Other andaluz spelling proposals are planned to be added as well.
 
 ## Usage
 
 [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
+
 [cordova-android](https://github.com/apache/cordova-android) version 6.3.0.
+
 [cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
 
 ### Development server
