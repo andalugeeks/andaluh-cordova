@@ -1,4 +1,4 @@
-# Andaluh-www
+# Andaluh-cordova
 
 Transliterate español (spanish) spelling to andaluz web transcriptor.
 
@@ -21,6 +21,8 @@ As there's no official or standard andaluz spelling, andaluh-py is adopting the 
 ## Usage
 
 [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
+[cordova-android](https://github.com/apache/cordova-android) version 6.3.0.
+[cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
 
 ### Development server
 
@@ -30,13 +32,23 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng build` to build the project. The build artifacts will be stored in the `www/` directory. Use the `--prod` flag for a production build.
 
+### Cordova Build
+Once you have built the project (previous step) and you have your app files generated at `www`directory, the next command will build the app in the target platform (ios|android)
+`cordova build ios|android`
+
+### Cordova Emulate
+`cordova emulate ios|android`
+
+### Cordova Run
+`cordova emulate ios|android`
+
 ### Run with Docker
 
 Run `ng build --prod` to build the project. Then run `docker-compose up --build` to build the docker image from `www/` built artifacts and running within a container with nginx. Edit the `docker-compose.yml` file with your preferences.
 
 ## Support
 
-Please [open an issue](https://github.com/andalugeeks/andaluh-www/issues/new) for support.
+Please [open an issue](https://github.com/andalugeeks/andaluh-cordova/issues/new) for support.
 
 ## Contributing
 

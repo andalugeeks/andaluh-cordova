@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "epa-transcriptor-www-angular": {
+    "andaluh-cordova": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "epa-transcriptor-www-angular:build"
+            "browserTarget": "andaluh-cordova:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "epa-transcriptor-www-angular:build:production"
+              "browserTarget": "andaluh-cordova:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "epa-transcriptor-www-angular:build"
+            "browserTarget": "andaluh-cordova:build"
           }
         },
         "test": {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "epa-transcriptor-www-angular-e2e": {
+    "andaluh-cordova-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -113,11 +113,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "epa-transcriptor-www-angular:serve"
+            "devServerTarget": "andaluh-cordova:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "epa-transcriptor-www-angular:serve:production"
+              "devServerTarget": "andaluh-cordova:serve:production"
             }
           }
         },
@@ -133,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "epa-transcriptor-www-angular"
+  "defaultProject": "andaluh-cordova"
 }

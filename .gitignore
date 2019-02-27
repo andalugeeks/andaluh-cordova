@@ -6,8 +6,12 @@
 /out-tsc
 /www
 
+# cordova built platforms
+/platforms
+
 # dependencies
 /node_modules
+
 
 # IDEs and editors
 /.idea

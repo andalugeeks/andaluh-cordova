@@ -24,6 +24,7 @@ import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 import EPA from '@andalugeeks/andaluh';
 
+
 @Component({
   selector: 'app-transcriptor',
   templateUrl: './transcriptor.component.html',
@@ -40,7 +41,6 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   showVafDrop: boolean = false;
   vaf: string = 'ç';
   vvf: string;
-  transcriptionType = environment.transcriptionType;
   from_options = [
     {label: 'ES', id: 'es'}
   ];
@@ -56,71 +56,13 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   constructor(
     private http: Http
   ) {
+    this.epa = new EPA();
     this._setDefaultOptions();
+    this._localSubcription();
   }
 
-  ngOnInit() {
-    if (this.transcriptionType === 'local') {
-      this.epa = new EPA();
-      this.localSubcription();
-    } else {
-      this.apiSubcription();
-    }
-  }
+  ngOnInit() {}
 
-  localSubcription() {
-    if (this.casFromUrl) {
-      debugger;
-      setTimeout(() => {
-        debugger;
-        if (this.textCasElement) {
-          this.textCasElement.nativeElement.value = decodeURI(this.casFromUrl);
-        }
-        this.transcriptedValue = this.epa.transcript(this.casFromUrl, this.vaf, this.vvf);
-      }, 750);
-    }
-    
-    this.subscription.pipe(
-      debounceTime(0)
-    ).subscribe(casText => {
-      if (casText !== '') {
-        this.transcriptedValue = this.epa.transcript(casText, this.vaf, this.vvf);
-      } else {
-        this.transcriptedValue = '';
-      }
-    });
-  }
-
-  apiSubcription() {
-    if (this.casFromUrl) {
-      debugger;
-      setTimeout(() => {
-        debugger;
-        if (this.textCasElement) {
-          this.textCasElement.nativeElement.value = decodeURI(this.casFromUrl);
-        }
-        this.transcript(this.casFromUrl).subscribe((response) => {
-          const result = response.json();
-          this.transcriptedValue = decodeURI(result[Object.keys(result)[0]]);
-        });
-      }, 750);
-    }
-
-    this.subscription.pipe(
-      debounceTime(500)
-    ).subscribe(casText => {
-      if (casText !== '') {
-        const timebefore = new Date();
-        this.transcript(casText).subscribe((response) => {
-          const result = response.json();
-          this.transcriptedValue = result[Object.keys(result)[0]];
-        });
-      } else {
-        this.transcriptedValue = '';
-      }
-    });
-  }
-  
   changeVaf(value) {
     this.vaf = value;
     this.subscription.next(this.textCasElement.nativeElement.value);
@@ -155,9 +97,29 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
     this.subscription.next(casText);
   }
 
-  transcript(casText: string) {
-    return this.http.get(`${environment.transcriptionAPI}?texto=${encodeURI(casText)}`);
+  private _localSubcription() {
+    if (this.casFromUrl) {
+      debugger;
+      setTimeout(() => {
+        debugger;
+        if (this.textCasElement) {
+          this.textCasElement.nativeElement.value = decodeURI(this.casFromUrl);
+        }
+        this.transcriptedValue = this.epa.transcript(this.casFromUrl, this.vaf, this.vvf);
+      }, 750);
+    }
+    
+    this.subscription.pipe(
+      debounceTime(0)
+    ).subscribe(casText => {
+      if (casText !== '') {
+        this.transcriptedValue = this.epa.transcript(casText, this.vaf, this.vvf);
+      } else {
+        this.transcriptedValue = '';
+      }
+    });
   }
+  
 
   // NOTE: this could come from a JSON file where all tthe options will be defined
   private _setDefaultOptions() {

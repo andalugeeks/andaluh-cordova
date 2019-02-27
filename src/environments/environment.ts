@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  transcriptionType: 'local',
-  debug: false,
-  transcriptionAPI: 'https://api.andaluh.es/epa'
+  debug: false
 };
 
 /*
