@@ -5,7 +5,7 @@
                 <div class="selected">
                     {{ from.label | translate }}
                 </div>
-                <ul [class.active]="show_options">
+                <ul [class.active]="false">
                     <li *ngFor="let option of from_options;" [ngClass]="{selected: from.label === option.id}">
                         {{ option.label | translate }}
                     </li>
@@ -55,7 +55,7 @@
                 <div class="selected">
                     {{ to.label | translate }}
                 </div>
-                <ul [class.active]="show_options">
+                <ul [class.active]="false">
                     <li *ngFor="let option of to_options;" [ngClass]="{selected: to.id === option.id}">
                         {{ option.label | translate }}
                     </li>
