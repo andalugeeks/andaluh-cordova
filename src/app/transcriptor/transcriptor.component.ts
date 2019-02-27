@@ -3,25 +3,11 @@
  * 
  * Authors:
  * - Eduardo Amador <eamadorpaton@gmail.com>
- * - Ksar Feui <a.moreno.losana@gmail.com>
- * - J. Félix Ontañón <felixonta@gmail.com>
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation version 3 of the License.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Component, ViewChild, HostBinding, OnInit, OnDestroy } from '@angular/core';
-import { Http } from '@angular/http';
-import { environment } from '../../environments/environment';
 import EPA from '@andalugeeks/andaluh';
 
 
@@ -53,9 +39,7 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   casFromUrl: string = this._getParam("text");
   transcriptedValue: string = '';
 
-  constructor(
-    private http: Http
-  ) {
+  constructor() {
     this.epa = new EPA();
     this._setDefaultOptions();
     this._localSubcription();

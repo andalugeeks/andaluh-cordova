@@ -13,21 +13,8 @@
 
   </div>
 
-  <div class="navbar-menu center mobile-floating" [class.is-active]="isActive">
+  <div class="navbar-menu" [class.is-active]="isActive">
     <div class="navbar-end">
-
-        <!-- <a class="navbar-item">
-            {{ 'MENU.ONE' | translate }}
-          </a>
-          <a class="navbar-item">
-            {{ 'MENU.TWO' | translate }}
-          </a>
-          <a class="navbar-item">
-            {{ 'MENU.THREE' | translate }}
-          </a>
-          <a class="navbar-item">
-            {{ 'MENU.FOUR' | translate }}
-          </a>   -->
         <a class="navbar-item">
           <span *ngIf="currentLang === 'and'" (click)="langTo('en')">(EN)</span>
           <span *ngIf="currentLang !== 'and'" (click)="langTo('and')">(AND)</span>
