@@ -27,26 +27,35 @@ As there's no official or standard andaluz spelling, andaluh-py & andaluh-js is 
 [cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
 
 ### Development server
-
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Build
-
 Run `ng build` to build the project. The build artifacts will be stored in the `www/` directory. Use the `--prod` flag for a production build.
 
+### Cordova Prepare
+Once you have built the angular app (previous step), the following command will install the platforms (android, ios) and apply whatever config is found in the `config.xml` file.
+
+`cordova prepare`
+
+
 ### Cordova Build
-Once you have built the project (previous step) and you have your app files generated at `www`directory, the next command will build the app in the target platform (ios|android)
+Once you have built the project (previous step) and you have your app files generated at `www`directory.
+The following command will build the app in the target platform (ios|android)
+
 `cordova build ios|android`
+
 
 ### Cordova Emulate
 `cordova emulate ios|android`
 
+
 ### Cordova Run
-`cordova emulate ios|android`
+`cordova run ios|android`
+
 
 ### Run with Docker
-
 Run `ng build --prod` to build the project. Then run `docker-compose up --build` to build the docker image from `www/` built artifacts and running within a container with nginx. Edit the `docker-compose.yml` file with your preferences.
+
 
 ## Support
 
