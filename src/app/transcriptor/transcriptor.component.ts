@@ -68,7 +68,7 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
     this.subscription.next(this.textCasElement.nativeElement.value);
   }
 
-  dropdownOpen() {
+  dropdownToggle() {
     this.showVafDrop = !this.showVafDrop;
   }
   
