@@ -29,10 +29,18 @@
             width: 100%;
             padding: 12px 22px 24px;
             margin-bottom: 16px;
+
+            @include until($tablet) {
+                padding: 12px 12px 24px;
+            }
+            
             header {
                 margin: 12px 0;
                 text-align: center;
 
+                & > div.column {
+                    padding: 0;
+                }
                 @include until($tablet) {
                     margin: 0;
                 }
