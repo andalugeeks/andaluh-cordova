@@ -6,8 +6,9 @@
 /out-tsc
 /www
 
-# cordova built platforms
+# cordova built
 /platforms
+/plugins
 
 # dependencies
 /node_modules
