@@ -38,16 +38,16 @@ Once you have built the angular app (previous step), the following command will 
 `cordova prepare`
 
 
+### Cordova Run
+When running this comman with an andriod device plugged in USB, the app will be installed directly in the device, otherwise if no target specified it will try to find a simulator for the desired platform
+
+`cordova run ios|android`
+
+
 ### Cordova Build
 The following command will build the app in the target platform (ios|android)
 
 `cordova build ios|android`
-
-
-### Cordova Run
-When running this comman with an andriod device plugged in USB, the app will be installed directly in the device, otherwise if no target specified it will try to find a simulator for the desired platform
-`cordova run ios|android`
-
 
 ### Cordova Emulate
 `cordova emulate ios|android`
