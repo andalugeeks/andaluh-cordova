@@ -16,8 +16,12 @@
   <div class="navbar-menu" [class.is-active]="isActive">
     <div class="navbar-end">
         <a class="navbar-item">
-          <span *ngIf="currentLang === 'and'" (click)="langTo('en')">(EN)</span>
-          <span *ngIf="currentLang !== 'and'" (click)="langTo('and')">(AND)</span>
+          <span *ngIf="currentLang === 'es'" (click)="langTo('and')">(AND)</span>
+          <span *ngIf="currentLang === 'and'" (click)="langTo('es')">(ES)</span>
+        </a>
+
+        <a href="https://andaluhepa.files.wordpress.com/2018/06/propuesta-de-ortografc3ada-andaluza-epa-actualizada-13-06-18-docx.pdf" target="_blank" class="navbar-item">
+          {{ 'MENU.EPA' | translate }}
         </a>
     </div>
   </div>

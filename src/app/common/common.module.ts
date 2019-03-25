@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { AppService } from './app.service';
 
 const components = [
   NavMenuComponent,
@@ -17,7 +18,7 @@ const components = [
     TranslateModule
   ],
   declarations: components,
-  providers: [ ],
+  providers: [AppService],
   exports : [...components]
 })
 export class CommonModule { }

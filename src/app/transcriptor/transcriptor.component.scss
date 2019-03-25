@@ -3,8 +3,11 @@
 :host {
     width: 100%;
     margin: 0;
+    padding: 0 6px;
     justify-content: center;
 
+    display: block;
+    
     @media screen and (max-width: 1087px) {
         @media screen and (orientation:portrait) {
             display: block !important;
@@ -22,6 +25,18 @@
         background-color: white;
     }
 
+    .sharing-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & > div {
+            padding: 2px 4px;
+            cursor: pointer;
+            color: $colorPrimary;
+        }
+    }
+
     .textarea-wrapper {
         flex: 0 0 48%;
         margin: 12px 4px;
@@ -29,11 +44,13 @@
         box-shadow: 1px 1px 0px $textareaShadowColor;
         border-radius: 8px;
         min-height: 240px;
-
+        display: flex;
+        flex-direction: column;
         @include until($tablet) {
             min-height: 50vh;
+            
         }
-
+        
         .options-container {
             color: #706D6D;
             display: flex;
@@ -83,6 +100,14 @@
 
             @include until($tablet) {
                 min-height: 200px;
+            }
+        }
+
+        .sharing-wrapper {
+            justify-content: flex-end;
+            padding: 0px 8px 2px;
+            img {
+                width: 32px;
             }
         }
     }

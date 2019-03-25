@@ -2,11 +2,12 @@
 
 <div class="content-wrapper">
     <div class="top">
-        <header>
+        <header #headerEl>
             <div class="column is-full">    
                 <img src='./assets/imgs/logo.png' />
             </div>
         </header>
+        <div #contentEl></div>
         <router-outlet></router-outlet>
     </div>
     <app-footer></app-footer>

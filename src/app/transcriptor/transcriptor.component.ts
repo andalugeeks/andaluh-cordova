@@ -5,11 +5,13 @@
  * - Eduardo Amador <eamadorpaton@gmail.com>
  */
 
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Component, ViewChild, HostBinding, OnInit, OnDestroy } from '@angular/core';
-import EPA from '@andalugeeks/andaluh';
+import { AppService } from '../common/app.service';
+import { SetTextareaEvent } from '../common/app.events';
 
+import EPA from '@andalugeeks/andaluh';
 
 @Component({
   selector: 'app-transcriptor',
@@ -17,16 +19,20 @@ import EPA from '@andalugeeks/andaluh';
   styleUrls: ['./transcriptor.component.scss'],
 })
 export class TranscriptorComponent implements OnInit, OnDestroy {
-  
-  @ViewChild('textCasElement') textCasElement;
-  @HostBinding('class.columns') grid: boolean = true;
 
+  @ViewChild('textCasElement') textCasElement;
+  @ViewChild('textAndElement') textAndElement;
+  @ViewChild('andWrapperElement') andWrapperElement;
+  @HostBinding('class.columns') grid: boolean = true;
+  
   private epa: EPA;
   private subscription: Subject<string> = new Subject();
+  private appSubscription: Subscription;
   
   showVafDrop: boolean = false;
   vaf: string = 'ç';
   vvf: string;
+  
   from_options = [
     {label: 'ES', id: 'es'}
   ];
@@ -36,16 +42,36 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   from: any;
   to: any;
   
-  casFromUrl: string = this._getParam("text");
   transcriptedValue: string = '';
+  textLengthBeforeTyping: number = 0;
+  _isTablet: boolean;
 
-  constructor() {
+  constructor(private appService: AppService) {
     this.epa = new EPA();
     this._setDefaultOptions();
     this._localSubcription();
+
+    this.appSubscription = this.appService.observe()
+      .subscribe(state => {
+        this._isTablet = state.device && state.device.info ? state.device.info.isTablet : null;
+        if (this._isTablet ) {
+          this.appSubscription.unsubscribe();
+        }
+      });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.textAndElement) {
+      this.textAndElement = this.textAndElement.nativeElement;
+    }
+    if (this.andWrapperElement) {
+      this.andWrapperElement = this.andWrapperElement.nativeElement;
+    }
+  }
+
+  pastedText(casText: string) {
+    this.subscription.next(casText);
+  }
 
   changeVaf(value) {
     this.vaf = value;
@@ -81,18 +107,22 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
     this.subscription.next(casText);
   }
 
-  private _localSubcription() {
-    if (this.casFromUrl) {
-      debugger;
+  onFocus() {
+    this.textLengthBeforeTyping = this.transcriptedValue.length;
+    this.appService.dispatch(new SetTextareaEvent({focus: true}));
+  }
+
+  onBlur() {
+    const textChanged = (this.textLengthBeforeTyping !== this.transcriptedValue.length) && this.transcriptedValue.length >= 4;
+    this.appService.dispatch(new SetTextareaEvent({focus: false, textChanged: textChanged}));
+    if (textChanged && !this._isTablet) {
       setTimeout(() => {
-        debugger;
-        if (this.textCasElement) {
-          this.textCasElement.nativeElement.value = decodeURI(this.casFromUrl);
-        }
-        this.transcriptedValue = this.epa.transcript(this.casFromUrl, this.vaf, this.vvf);
-      }, 750);
+        this.andWrapperElement.scrollIntoView();
+      }, 250);
     }
-    
+  }
+
+  private _localSubcription() {
     this.subscription.pipe(
       debounceTime(0)
     ).subscribe(casText => {
@@ -104,22 +134,10 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
     });
   }
   
-
   // NOTE: this could come from a JSON file where all tthe options will be defined
   private _setDefaultOptions() {
     this.from = {label: 'ES', id: 'es'};
     this.to = {label: 'AND', id: 'and'};
-  }
-
-  private _getParam(name) {
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-    var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec( window.location.href );
-    if( results == null )
-      return "";
-    else
-      return results[1];
   }
 
   ngOnDestroy() {

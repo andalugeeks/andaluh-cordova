@@ -1,6 +1,30 @@
 @import 'theme';
 
 :host {
+  
+  &:not(.isTablet) {
+    transition: transform $animationSpeed3 $animationF0;
+    transform: translateY(-100%);
+
+    nav.navbar {
+      transition: margin-top $animationSpeed3 $animationF0;
+      margin-top: -100%;
+    }
+
+    @media screen and (max-width: 1087px) {
+      @media screen and (orientation: portrait) {
+
+        transition: transform $animationSpeed3 $animationF0;
+        transform: translateY(0%);
+
+        nav.navbar {
+          margin-top: 0;
+          transition: margin-top $animationSpeed3 $animationF0;
+        }
+      }
+    }
+  }
+
   .overlay {
     opacity: 0.1;
     position: absolute;
@@ -18,6 +42,7 @@
       }
     }
   }
+
   .logo-wrapper {
     flex-direction: column;
     display: flex;
@@ -27,7 +52,9 @@
   }
 
   nav.navbar {
+    
     &.is-primary {
+
       .navbar-item {
         color: $colorWhite;
         @include until($tablet) {
@@ -36,6 +63,7 @@
           }
         }
       }
+
       @media screen and (max-width: 1087px) {
         .navbar-item {
           &:hover {
@@ -43,6 +71,7 @@
           }
         }
       }
+
       .navbar-menu {
         background-color: $colorPrimary;
       }
@@ -82,6 +111,7 @@
           margin-left: auto;
         }
       }
+
       .navbar-item {
         transition: background-color $animationSpeed3 $animationF0;
       }

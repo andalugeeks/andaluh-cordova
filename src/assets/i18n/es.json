@@ -1,0 +1,26 @@
+{
+    "MENU": {
+        "ONE": "Inicio",
+        "TWO": "Quienes somos",
+        "THREE": "Contacto",
+        "FOUR": "Repositorio",
+        "EPA": "Propuesta EPA"
+    },
+    "FOOTER": {
+        "NEWSLETTER": {
+            "HEADLINE": "Newsletter",
+            "MSG": "¡Subscríbete a nuestro newsletter para estar al día! Prometemos no ser pesadas y solo informar de cosas importantes.",
+            "BTN": "Subscríbeme"
+        },
+        "SOCIAL": {
+            "HEADLINE": "Redes Sociales",
+            "MSG": "Si lo que quieres es mantenerte informada, entonces puedes seguirnos en nuestras redes sociales, que tenemos todas las que quieras."
+        },
+        "OPEN_SOURCE": {
+            "HEADLINE": "GitHub",
+            "MSG": "Somos Open Soure, así que si quieres ver nuestro código no tienes más que ir a nuestro GitHub y echarle un vistazo a nuestro trabajo."
+        }
+    },
+    "ES": "castellano",
+    "AND": "andalûh"
+}

@@ -6,6 +6,8 @@
     height: 100%;
 
     .content-wrapper {
+
+        scroll-behavior: smooth;
         flex: 1;
         overflow: auto;
         background-image: url('../assets/svg/curve_bg.svg');
@@ -14,14 +16,10 @@
         background-position-y: -2px;
 
         @media screen and (max-width: 1087px) {
-            @media screen and (orientation:portrait) {
-                background-image: url('../assets/svg/curve_bg_mobile.svg');
-            }
+            background-image: url('../assets/svg/curve_bg_mobile.svg');
         }
         @include until($tablet) {
-            @media screen and (orientation:portrait) {
-                background-image: url('../assets/svg/curve_bg_mobile.svg');
-            }
+            background-image: url('../assets/svg/curve_bg_mobile.svg');
         }
 
 

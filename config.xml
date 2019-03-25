@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.andalugeeks.andaluh" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="es.andaluh.transcriptor" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Andaluh</name>
     <description>
-        Andaluh-cordova - AndaluGeeks
+        El Transcriptor Castellano-Andalûh EPA es una herramienta que permite pasar un texto grafiado de acuerdo a las normas del Castellano estandar a las normas del Andalûh estandar EPA.
     </description>
     <author email="andalugeeks@gmail.com" href="http://andaluh.es">
         AndaluGeeks
@@ -15,6 +15,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="loadUrlTimeoutValue" value="60000" />
     <preference name="Orientation" value="portrait" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashMaintainAspectRatio" value="true" />
@@ -68,8 +69,8 @@
         <splash src="res/screen/ios/Default@2x~ipad~anyany.png" />
         <splash src="res/screen/ios/Default@2x~ipad~comany.png" />
     </platform>
-    <engine name="android" spec="~6.3.0" />
     <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />

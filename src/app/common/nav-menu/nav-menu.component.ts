@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,10 +10,17 @@ import { TranslateService } from '@ngx-translate/core';
 export class NavMenuComponent implements OnInit, OnDestroy {
 
   isActive: boolean = false;
-  currentLang = 'and';
+  currentLang = 'es';
 
-  constructor(private translate: TranslateService) {
-    
+  @HostBinding('class.isTablet') _isTablet: boolean = true;
+
+  constructor(private appService: AppService, private translate: TranslateService) {
+    this.appService.observe()
+      .subscribe(state => {
+        if (state.device && state.device.info) {
+          this._isTablet = state.device.info.isTablet;
+        }
+      });
   }
 
   ngOnInit() { }

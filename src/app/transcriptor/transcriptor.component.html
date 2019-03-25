@@ -20,11 +20,15 @@
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
+        (paste)="pastedText($event.clipboardData.getData('text/plain'))"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
         (keypress)="onKeyUp($event.target.value)"
         (keyup)="onKeyUp($event.target.value)"
     ></textarea>
 </div>
-<div class="textarea-wrapper">
+<div class="textarea-wrapper" #andWrapperElement>
+    
     <div class="options-container">
         <div class="options-left">
             <div class="icon-circle primary-border" (click)="resetVafAndVvf()">EPA</div>
@@ -64,6 +68,7 @@
         </div>
     </div>
     <textarea 
+        #textAndElement
         class="textarea column"
         autocomplete="off"
         autocorrect="off"
