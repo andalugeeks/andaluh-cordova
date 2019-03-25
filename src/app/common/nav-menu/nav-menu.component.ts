@@ -10,7 +10,7 @@ import { AppService } from '../app.service';
 export class NavMenuComponent implements OnInit, OnDestroy {
 
   isActive: boolean = false;
-  currentLang = 'es';
+  currentLang = 'and'; // TODO: AppState 
 
   @HostBinding('class.isTablet') _isTablet: boolean = true;
 

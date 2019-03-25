@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   @HostBinding('class.isTablet') _isTablet: boolean = true;
 
   constructor(private appService: AppService, translate: TranslateService) {
-    translate.setDefaultLang("es");
+    translate.setDefaultLang("and");
 
     document.addEventListener("deviceready", () => {
       this._isTablet = false;
