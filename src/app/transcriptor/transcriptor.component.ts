@@ -8,8 +8,9 @@
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Component, ViewChild, HostBinding, OnInit, OnDestroy } from '@angular/core';
-import EPA from '@andalugeeks/andaluh';
-
+import { Http } from '@angular/http';
+import { EPA } from '@andalugeeks/andaluh';
+import { NavigatorExtended } from '../types/navigation.type';
 
 @Component({
   selector: 'app-transcriptor',
@@ -25,6 +26,7 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   private subscription: Subject<string> = new Subject();
   
   showVafDrop: boolean = false;
+  showShareModal: boolean = false;
   vaf: string = 'ç';
   vvf: string;
   from_options = [
@@ -35,11 +37,21 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   ];
   from: any;
   to: any;
-  
+
   casFromUrl: string = this._getParam("text");
   transcriptedValue: string = '';
+  value: string = '';
+  shareUrl: string = '';
+  animated: string = '';
+  share_text = {
+    copy: 'TRANSCRIPT.SHARE.COPY',
+    social: 'TRANSCRIPT.SHARE.SOCIAL',
+    share: 'TRANSCRIPT.SHARE.SHARE',
+    msg: 'TRANSCRIPT.SHARE.MSG',
+    copied: 'TRANSCRIPT.SHARE.COPIED',
+  };
 
-  constructor() {
+  constructor(private http: Http) {
     this.epa = new EPA();
     this._setDefaultOptions();
     this._localSubcription();
@@ -71,7 +83,54 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   dropdownToggle() {
     this.showVafDrop = !this.showVafDrop;
   }
-  
+
+  copy() {
+    this._getShortURL().then((shortURL) => {
+      (navigator as NavigatorExtended).clipboard.writeText(this.transcriptedValue + " " + shortURL).then(() => {
+        this.animated = 'animated'
+        setTimeout(() => this.animated = '', 3000);
+      });
+    }).catch(e => console.error(e));
+  }
+
+  share() {
+    this._getShortURL().
+      then((shortURL) => {
+        this.shareUrl = shortURL;
+        this.showShareModal = true;
+      }).catch(e => console.error(e));
+  }
+
+  shareURL(url) {
+    window.open(url, '_blank');
+    this.showShareModal = false;
+  }
+
+  shareFacebook() {
+    // Facebook automatically cuts long texts.
+    this.shareURL(`https://www.facebook.com/sharer.php?u=${this.shareUrl}&quote=${this.transcriptedValue}`);
+  }
+
+  shareTwitter() {
+    var tweetMaxText = this.transcriptedValue.slice(0, 254); // 254 text message + url = 280 (max tweet length)
+    this.shareURL(`https://twitter.com/intent/tweet?text=${tweetMaxText}&url=${this.shareUrl}`);
+  }
+
+  shareTelegram() {
+    this.shareURL(`https://telegram.me/share?text=${this.transcriptedValue}&url=${this.shareUrl}`);
+  }
+
+  shareWhatsapp() {
+    this.shareURL(`whatsapp://send?text=${this.transcriptedValue}%0A%0A${this.shareUrl}`);
+  }
+
+  closeModal(evt) {
+    if (evt.target.id === 'modal-wrapper') {
+      this.showShareModal = false;
+      this.shareUrl = '';
+    }
+  }
+
   copyToClipboard(event) {
     event.target.select();
     document.execCommand("copy");
@@ -103,7 +162,22 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
+  private _getShortURL(): Promise<string> {
+    const URL_API = 'https://s.andaluh.es/yourls-api.php?signature=d387956c6c&action=shorturl&url=';
+    const URL = 'https://andaluh.es/transcriptor/#' + `?text=${this.value}`;
+    return new Promise((resolve, reject) => {
+      this.http.get(`${URL_API}${encodeURIComponent(URL)}`).subscribe((response) => {
+        const text = response.text();
+        const xml = (new DOMParser()).parseFromString(text, 'text/xml');
+        const urlElement = xml.querySelector('shorturl');
+        if (urlElement) {
+          resolve(urlElement.textContent);
+        }
+        reject('Error: Short URL was not created.')
+      });
+    });
+  }
 
   // NOTE: this could come from a JSON file where all tthe options will be defined
   private _setDefaultOptions() {

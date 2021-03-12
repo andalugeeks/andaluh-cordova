@@ -73,5 +73,43 @@
         [value]="transcriptedValue"
         (click)="copyToClipboard($event)"
     ></textarea>
+    <div class="share-wrapper" [ngClass]="{visible: transcriptedValue !== ''}">
+        <a class="copy" (click)="copy()">
+            <img src="./assets/imgs/share/copy.png" />
+            <span class="tooltip">{{share_text.copy | translate}}</span>
+        </a>
+        <a class="share" (click)="share()">
+            <img src="./assets/imgs/share/link.png" />
+            <span class="tooltip">{{share_text.social | translate}}</span>
+        </a>
+    </div>    
 </div>
+
 <div class="overlay" *ngIf="showVafDrop" (click)="dropdownToggle()"></div>
+
+<div id="modal-wrapper" class="modal-wrapper" *ngIf="showShareModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>{{share_text.share | translate}}</h2>
+            <br>
+            <p>{{share_text.msg | translate}}</p>
+            <hr>
+        </div>
+        <div class="modal-body">
+            <div class="facebook-wrapper">
+                <div class="share-icon facebook-link" (click)="shareFacebook()"></div>
+            </div>
+            <div class="twitter-wrapper">
+                <div class="share-icon twitter-link" (click)="shareTwitter()"></div>
+            </div>
+            <div class="telegram-wrapper">
+                <div class="share-icon telegram-link" (click)="shareTelegram()"></div>
+            </div>
+            <div class="whatsapp-wrapper">
+                <div class="share-icon whatsapp-link" (click)="shareWhatsapp()"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<span id="tooltip-clipboard" class="tooltip-clipboard" [ngClass]="animated">{{share_text.copied | translate}}</span>
