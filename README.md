@@ -22,9 +22,23 @@ As there's no official or standard andaluz spelling, andaluh-py & andaluh-js is 
 
 [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
-[cordova-android](https://github.com/apache/cordova-android) version 6.3.0.
+[cordova-android](https://github.com/apache/cordova-android) version 11.0.0.
 
 [cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
+
+Note: Cordova 11.0.0 requires Java 11 (Oracle JDK 11 or OpenJDK 11)
+```
+$ sudo apt install openjdk-11-jdk
+$ sudo update-alternatives --config javac # Select openjdk-11
+```
+
+Note: Cordova requires Gradle and Android Build-Tools 32.0.0
+```
+$ sudo apt install gradle
+$ sudo apt install sdkmanager
+$ sudo sdkmanager "build-tools;32.0.0"
+$ sudo sdkmanager --licenses # Accept the license
+```
 
 ### Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -41,8 +55,28 @@ Once you have built the angular app (previous step), the following command will 
 ### Cordova Run
 When running this comman with an andriod device plugged in USB, the app will be installed directly in the device, otherwise if no target specified it will try to find a simulator for the desired platform
 
+Ensure JAVA_HOME and ANDROID_HOME env variables are set
+
+```
+$ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+$ export ANDROID_HOME=/opt/android-sdk
+```
+
 `cordova run ios|android`
 
+If you get the following error ...
+
+```
+> Failed to install the following SDK components:
+      platforms;android-32 Android SDK Platform 32
+  The SDK directory is not writable (/opt/android-sdk)
+```
+
+... this means your user has no write access to android-sdk. Weird, but required. So then do the following and run the `cordova` command after:
+
+```
+$ sudo chown -R `whoami`:`whoami` /opt/android-sdk/
+```
 
 ### Cordova Build
 The following command will build the app in the target platform (ios|android)
