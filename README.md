@@ -14,30 +14,35 @@ Transliterate español (spanish) spelling to andaluz app transcriptor.
 
 The **Andalusian varieties of [Spanish]** (Spanish: *andaluz*; Andalusian) are spoken in Andalusia, Ceuta, Melilla, and Gibraltar. They include perhaps the most distinct of the southern variants of peninsular Spanish, differing in many respects from northern varieties, and also from Standard Spanish. Further info: https://en.wikipedia.org/wiki/Andalusian_Spanish.
 
-This app uses the [Andaluh-js](https://github.com/andalugeeks/andaluh-js), for further info about transliteration functions to convert *español* (spanish) spelling to andaluz p
+This app uses the [Andaluh-js](https://github.com/andalugeeks/andaluh-js), for further info about transliteration functions to convert *español* (spanish) spelling to andaluz spelling proposals.
 
 As there's no official or standard andaluz spelling, andaluh-py & andaluh-js is adopting the **EPA proposal (Er Prinzipito Andaluh)**. Further info: https://andaluhepa.wordpress.com. Other andaluz spelling proposals are planned to be added as well.
 
 ## Usage
 
+[NodeJS](https://github.com/nodejs) version 14.17.0.
+
 [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
-[cordova-android](https://github.com/apache/cordova-android) version 11.0.0.
+[cordova-android](https://github.com/apache/cordova-android) version 13.0.0.
 
 [cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
 
-Note: Cordova 11.0.0 requires Java 11 (Oracle JDK 11 or OpenJDK 11)
+Note: Cordova 13.0.0 requires Java 17 (Oracle JDK 17 or OpenJDK 17) and Android Build-Tools 34.0.0
 ```
-$ sudo apt install openjdk-11-jdk
-$ sudo update-alternatives --config javac # Select openjdk-11
+$ sudo apt install openjdk-17-jdk
+$ sudo update-alternatives --config javac # Select openjdk-17
+$ sudo apt install sdkmanager
+$ sudo sdkmanager "build-tools;34.0.0"
+$ sudo sdkmanager --licenses # Accept the license
 ```
 
-Note: Cordova requires Gradle and Android Build-Tools 32.0.0
+Note: Cordova 13.0.0 requires Gradle 8.7. I use SDKMAN to install but you can use your preferred install mechansim
 ```
-$ sudo apt install gradle
-$ sudo apt install sdkmanager
-$ sudo sdkmanager "build-tools;32.0.0"
-$ sudo sdkmanager --licenses # Accept the license
+$ curl -s "https://get.sdkman.io" | bash
+$ source "/home/fontanon/.sdkman/bin/sdkman-init.sh"
+$ sdk install gradle 8.7
+
 ```
 
 ### Development server
@@ -58,7 +63,7 @@ When running this comman with an andriod device plugged in USB, the app will be 
 Ensure JAVA_HOME and ANDROID_HOME env variables are set
 
 ```
-$ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+$ export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 $ export ANDROID_HOME=/opt/android-sdk
 ```
 
@@ -82,6 +87,14 @@ $ sudo chown -R `whoami`:`whoami` /opt/android-sdk/
 The following command will build the app in the target platform (ios|android)
 
 `cordova build ios|android`
+
+If you get the following error ...
+
+```
+Unrecognized option: --illegal-access=permit
+```
+
+Then remove the `--illegal-access=permit` flag from `platforms/android/gradlew` line 165
 
 ### Cordova Emulate
 `cordova emulate ios|android`

@@ -54,7 +54,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
-    "cordova-android": "^11.0.0",
+    "cordova-android": "^13.0.0",
     "cordova-plugin-file": "^8.1.0",
     "cordova-plugin-file-transfer": "git+https://github.com/apache/cordova-plugin-file-transfer.git",
     "jasmine-core": "~2.99.1",

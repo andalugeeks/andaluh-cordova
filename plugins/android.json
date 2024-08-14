@@ -10,9 +10,17 @@
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.andalugeeks.andaluh"
     },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.andalugeeks.andaluh"
+    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "com.andalugeeks.andaluh"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "ANDROIDX_WEBKIT_VERSION": "1.4.0",
+      "PACKAGE_NAME": "com.andalugeeks.andaluh"
+    }
+  }
 }

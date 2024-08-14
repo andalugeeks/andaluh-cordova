@@ -23,8 +23,8 @@
     <preference name="SplashScreenDelay" value="4000" />
     <platform name="android">
         <preference name="android-minSdkVersion" value="22" />
-        <preference name="android-targetSdkVersion" value="32" />
-        <preference name="android-compileSdkVersion" value="32" />
+        <preference name="android-targetSdkVersion" value="34" />
+        <preference name="android-compileSdkVersion" value="34" />
         <allow-intent href="market:*" />
         <preference name="SplashMaintainAspectRatio" value="true" />
         <preference name="SplashShowOnlyFirstTime" value="true" />
