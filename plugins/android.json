@@ -8,19 +8,19 @@
   },
   "installed_plugins": {
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.andalugeeks.andaluh"
+      "PACKAGE_NAME": "es.andaluh.transcriptor"
     },
     "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "com.andalugeeks.andaluh"
+      "PACKAGE_NAME": "es.andaluh.transcriptor"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.andalugeeks.andaluh"
+      "PACKAGE_NAME": "es.andaluh.transcriptor"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
       "ANDROIDX_WEBKIT_VERSION": "1.4.0",
-      "PACKAGE_NAME": "com.andalugeeks.andaluh"
+      "PACKAGE_NAME": "es.andaluh.transcriptor"
     }
   }
 }

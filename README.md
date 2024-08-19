@@ -96,6 +96,10 @@ Unrecognized option: --illegal-access=permit
 
 Then remove the `--illegal-access=permit` flag from `platforms/android/gradlew` line 165
 
+Use `--release` to create a release
+
+`$ cordoba build android --release`
+
 ### Cordova Emulate
 `cordova emulate ios|android`
 
