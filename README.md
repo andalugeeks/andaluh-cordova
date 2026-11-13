@@ -20,29 +20,30 @@ As there's no official or standard andaluz spelling, andaluh-py & andaluh-js is 
 
 ## Usage
 
-[NodeJS](https://github.com/nodejs) version 14.17.0.
+The Angular 6 web layer and the Cordova Android layer need **different Node versions**:
+
+- [NodeJS](https://github.com/nodejs) **10.x–14.x** for `npm install` and `ng build` (Angular CLI 6 uses `node-sass` 4, which does not build on newer Node).
+- [NodeJS](https://github.com/nodejs) **>= 20.17 / 22.9** for the `cordova` commands ([cordova-android](https://github.com/apache/cordova-android) 15.1.0 requires it). Cordova CLI 13.0.0 (`npx cordova@13.0.0 ...`).
 
 [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
-[cordova-android](https://github.com/apache/cordova-android) version 13.0.0.
+[cordova-android](https://github.com/apache/cordova-android) version 15.1.0 (targetSdk/compileSdk 36, minSdk 24, AGP 8.10.1, Gradle 8.14.2).
 
 [cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
 
-Note: Cordova 13.0.0 requires Java 17 (Oracle JDK 17 or OpenJDK 17) and Android Build-Tools 34.0.0
+Note: cordova-android 15 requires Java 17, Android SDK Platform 36 and Build-Tools 36.0.0
 ```
 $ sudo apt install openjdk-17-jdk
-$ sudo update-alternatives --config javac # Select openjdk-17
-$ sudo apt install sdkmanager
-$ sudo sdkmanager "build-tools;34.0.0"
-$ sudo sdkmanager --licenses # Accept the license
+$ sdkmanager "platforms;android-36" "build-tools;36.0.0"
+$ sdkmanager --licenses # Accept the license
 ```
 
-Note: Cordova 13.0.0 requires Gradle 8.7. I use SDKMAN to install but you can use your preferred install mechansim
-```
-$ curl -s "https://get.sdkman.io" | bash
-$ source "/home/fontanon/.sdkman/bin/sdkman-init.sh"
-$ sdk install gradle 8.7
+Note: Cordova needs a `gradle` binary in the `PATH` only to generate the Gradle wrapper (the wrapper then downloads Gradle 8.14.2). Any Gradle 8.14.x works, e.g. via SDKMAN (`sdk install gradle 8.14.3`).
 
+Example build of the Play Store bundle (with nvm):
+```
+$ nvm use 10 && npm install && npx ng build --prod
+$ nvm use 22 && npx cordova@13.0.0 build android --release -- --packageType=bundle
 ```
 
 ### Development server
