@@ -17,17 +17,26 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
+
+const { system, osInfo } = require('systeminformation');
 
 module.exports = {
-    /**
-   * Return a URL that can be used to identify this entry.
-   * Use a URL that can be used to as the src attribute of a <video> or
-   * <audio> tag. If that is not possible, construct a http(s)://(localhost) URL.
-   */
-    toURL: function () {
-        return window.location.origin.includes('file://')
-            ? this.nativeURL
-            : this.toInternalURL();
+    getDeviceInfo: async () => {
+        try {
+            const { manufacturer, model, uuid } = await system();
+            const { platform, distro, codename, build: version } = await osInfo();
+
+            return {
+                manufacturer,
+                model,
+                platform: platform === 'darwin' ? codename : distro,
+                version,
+                uuid,
+                isVirtual: false
+            };
+        } catch (e) {
+            console.log(e);
+        }
     }
 };

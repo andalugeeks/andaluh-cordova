@@ -85,20 +85,26 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   }
 
   copy() {
-    this._getShortURL().then((shortURL) => {
-      (navigator as NavigatorExtended).clipboard.writeText(this.transcriptedValue + " " + shortURL).then(() => {
-        this.animated = 'animated'
+    const text = this.transcriptedValue;
+    this._getShortURL()
+      // If the URL shortener is unreachable (e.g. offline), still copy the transcription.
+      .then((shortURL) => `${text} ${shortURL}`, () => text)
+      .then((toCopy) => this._writeClipboard(toCopy))
+      .then(() => {
+        this.animated = 'animated';
         setTimeout(() => this.animated = '', 3000);
-      });
-    }).catch(e => console.error(e));
+      })
+      .catch(e => console.error(e));
   }
 
   share() {
-    this._getShortURL().
-      then((shortURL) => {
-        this.shareUrl = shortURL;
+    this._getShortURL()
+      // If the URL shortener is unreachable, share the full link instead of doing nothing.
+      .catch(() => this._getLongURL())
+      .then((url) => {
+        this.shareUrl = url;
         this.showShareModal = true;
-      }).catch(e => console.error(e));
+      });
   }
 
   shareURL(url) {
@@ -108,20 +114,22 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
 
   shareFacebook() {
     // Facebook automatically cuts long texts.
-    this.shareURL(`https://www.facebook.com/sharer.php?u=${this.shareUrl}&quote=${this.transcriptedValue}`);
+    const url = encodeURIComponent(this.shareUrl);
+    const quote = encodeURIComponent(this.transcriptedValue);
+    this.shareURL(`https://www.facebook.com/sharer.php?u=${url}&quote=${quote}`);
   }
 
   shareTwitter() {
     var tweetMaxText = this.transcriptedValue.slice(0, 254); // 254 text message + url = 280 (max tweet length)
-    this.shareURL(`https://twitter.com/intent/tweet?text=${tweetMaxText}&url=${this.shareUrl}`);
+    this.shareURL(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetMaxText)}&url=${encodeURIComponent(this.shareUrl)}`);
   }
 
   shareTelegram() {
-    this.shareURL(`https://telegram.me/share?text=${this.transcriptedValue}&url=${this.shareUrl}`);
+    this.shareURL(`https://telegram.me/share?text=${encodeURIComponent(this.transcriptedValue)}&url=${encodeURIComponent(this.shareUrl)}`);
   }
 
   shareWhatsapp() {
-    this.shareURL(`whatsapp://send?text=${this.transcriptedValue}%0A%0A${this.shareUrl}`);
+    this.shareURL(`whatsapp://send?text=${encodeURIComponent(this.transcriptedValue + '\n\n' + this.shareUrl)}`);
   }
 
   closeModal(evt) {
@@ -142,13 +150,12 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
 
   private _localSubcription() {
     if (this.casFromUrl) {
-      debugger;
       setTimeout(() => {
-        debugger;
+        const casText = this._decodeParam(this.casFromUrl);
         if (this.textCasElement) {
-          this.textCasElement.nativeElement.value = decodeURI(this.casFromUrl);
+          this.textCasElement.nativeElement.value = casText;
         }
-        this.transcriptedValue = this.epa.transcript(this.casFromUrl, this.vaf, this.vvf);
+        this.transcriptedValue = this.epa.transcript(casText, this.vaf, this.vvf);
       }, 750);
     }
     
@@ -164,8 +171,8 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   }
 
   private _getShortURL(): Promise<string> {
-    const URL_API = 'https://s.andaluh.es/yourls-api.php?signature=d387956c6c&action=shorturl&url=';
-    const URL = 'https://andaluh.es/transcriptor/#' + `?text=${this.value}`;
+    const URL_API = 'https://s.andaluh.es/yourls-api.php?signature=6d975f17136f2fecb10e8e9cfc0f5712&action=shorturl&url=';
+    const URL = this._getLongURL();
     return new Promise((resolve, reject) => {
       this.http.get(`${URL_API}${encodeURIComponent(URL)}`).subscribe((response) => {
         const text = response.text();
@@ -173,16 +180,53 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
         const urlElement = xml.querySelector('shorturl');
         if (urlElement) {
           resolve(urlElement.textContent);
+        } else {
+          reject('Error: Short URL was not created.');
         }
-        reject('Error: Short URL was not created.')
-      });
+      }, (err) => reject(err));
     });
+  }
+
+  private _getLongURL(): string {
+    const casText = this.textCasElement ? this.textCasElement.nativeElement.value : '';
+    return 'https://andaluh.es/transcriptor/#' + `?text=${encodeURI(casText).replace(/&/g, '%26').replace(/#/g, '%23')}`;
+  }
+
+  private _writeClipboard(text: string): Promise<void> {
+    const nav = navigator as NavigatorExtended;
+    if (nav.clipboard && nav.clipboard.writeText) {
+      // The async Clipboard API can be rejected by the WebView (e.g. user activation
+      // expired while waiting for the short URL); fall back to execCommand.
+      return nav.clipboard.writeText(text).catch(() => this._execCommandCopy(text));
+    }
+    return this._execCommandCopy(text);
+  }
+
+  private _execCommandCopy(text: string): Promise<void> {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    return ok ? Promise.resolve() : Promise.reject(new Error('Copy to clipboard failed.'));
   }
 
   // NOTE: this could come from a JSON file where all tthe options will be defined
   private _setDefaultOptions() {
     this.from = {label: 'ES', id: 'es'};
     this.to = {label: 'AND', id: 'and'};
+  }
+
+  private _decodeParam(value: string): string {
+    try {
+      return decodeURIComponent(value);
+    } catch (e) {
+      return value; // malformed escape sequence: use it verbatim
+    }
   }
 
   private _getParam(name) {

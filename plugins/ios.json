@@ -12,14 +12,7 @@
     },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "com.andalugeeks.andaluh"
-    },
-    "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "com.andalugeeks.andaluh"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.andalugeeks.andaluh"
-    }
-  }
+  "dependent_plugins": {}
 }
