@@ -171,7 +171,7 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
   }
 
   private _getShortURL(): Promise<string> {
-    const URL_API = 'https://s.andaluh.es/yourls-api.php?signature=d387956c6c&action=shorturl&url=';
+    const URL_API = 'https://s.andaluh.es/yourls-api.php?signature=6d975f17136f2fecb10e8e9cfc0f5712&action=shorturl&url=';
     const URL = this._getLongURL();
     return new Promise((resolve, reject) => {
       this.http.get(`${URL_API}${encodeURIComponent(URL)}`).subscribe((response) => {
