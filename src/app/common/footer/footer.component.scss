@@ -17,6 +17,10 @@
     padding: 24px 28px 0;
     color: $colorWhite;
 
+    @include until($tablet) {
+      padding: 24px 16px 0;
+    }
+
     a {
       color: $colorWhite;
 

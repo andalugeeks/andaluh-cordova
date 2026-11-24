@@ -142,9 +142,7 @@ export class TranscriptorComponent implements OnInit, OnDestroy {
 
   private _localSubcription() {
     if (this.casFromUrl) {
-      debugger;
       setTimeout(() => {
-        debugger;
         if (this.textCasElement) {
           this.textCasElement.nativeElement.value = decodeURI(this.casFromUrl);
         }

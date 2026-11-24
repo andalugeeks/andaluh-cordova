@@ -37,9 +37,8 @@
     "@ngx-translate/http-loader": "^3.0.0",
     "android-versions": "^1.4.0",
     "bulma": "^0.7.2",
-    "cordova-ios": "^4.5.5",
-    "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-ios": "^8.1.0",
+    "cordova-plugin-device": "^3.0.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "xregexp": "^4.2.4",
@@ -55,8 +54,6 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "cordova-android": "^13.0.0",
-    "cordova-plugin-file": "^8.1.0",
-    "cordova-plugin-file-transfer": "git+https://github.com/apache/cordova-plugin-file-transfer.git",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -71,9 +68,7 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-file-transfer": {}
+      "cordova-plugin-device": {}
     },
     "platforms": [
       "ios",
