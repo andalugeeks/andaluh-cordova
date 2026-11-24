@@ -37,9 +37,8 @@
     "@ngx-translate/http-loader": "^3.0.0",
     "android-versions": "^1.4.0",
     "bulma": "^0.7.2",
-    "cordova-ios": "^4.5.5",
+    "cordova-ios": "^8.1.0",
     "cordova-plugin-device": "^3.0.0",
-    "cordova-plugin-splashscreen": "^5.0.2",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "xregexp": "^4.2.4",
@@ -69,8 +68,7 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-device": {}
     },
     "platforms": [
       "ios",

@@ -8,6 +8,7 @@
 
 # cordova built platforms
 /platforms
+/plugins
 
 # dependencies
 /node_modules
