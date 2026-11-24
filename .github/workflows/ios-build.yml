@@ -1,0 +1,51 @@
+# Compile-only check for the iOS app. It never signs, uploads or publishes
+# anything, and needs no Apple credentials.
+name: iOS build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    # Angular CLI 6 / node-sass 4 need Node 10, which has no build for the
+    # Apple Silicon macOS runners, so the web layer is built on Linux.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 10
+      - run: npm install --no-audit --no-fund
+      - run: npx ng build --prod
+      - uses: actions/upload-artifact@v4
+        with:
+          name: www
+          path: www
+          retention-days: 1
+
+  ios:
+    needs: web
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: www
+          path: www
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Only the Cordova packages are needed here; skip the node-sass build.
+      - run: npm install --no-audit --no-fund --ignore-scripts
+      - run: npx -y cordova@13.0.0 prepare ios
+      - name: Build for the iOS simulator
+        run: npx -y cordova@13.0.0 build ios --emulator
+      - name: Build for iOS devices (unsigned)
+        run: >
+          xcodebuild -workspace platforms/ios/App.xcworkspace -scheme App
+          -configuration Release -destination 'generic/platform=iOS'
+          CODE_SIGNING_ALLOWED=NO build
