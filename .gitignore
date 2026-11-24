@@ -8,6 +8,10 @@
 
 # cordova built platforms
 /platforms
+/plugins
+
+# local signing config (see build.example.json)
+/build.json
 
 # dependencies
 /node_modules

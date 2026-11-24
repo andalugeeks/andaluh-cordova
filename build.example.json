@@ -1,0 +1,32 @@
+{
+  "//": "Copy to build.json (git-ignored) and fill in. Cordova reads it for signing: `cordova build <platform> --release`.",
+  "android": {
+    "release": {
+      "keystore": "/path/to/andaluh-release.jks",
+      "storePassword": "",
+      "alias": "",
+      "password": "",
+      "packageType": "bundle"
+    }
+  },
+  "ios": {
+    "debug": {
+      "codeSignIdentity": "Apple Development",
+      "developmentTeam": "LAWPFLVDHJ",
+      "packageType": "development",
+      "automaticProvisioning": true,
+      "buildFlag": [
+        "-allowProvisioningUpdates"
+      ]
+    },
+    "release": {
+      "codeSignIdentity": "Apple Development",
+      "developmentTeam": "LAWPFLVDHJ",
+      "packageType": "app-store",
+      "automaticProvisioning": true,
+      "buildFlag": [
+        "-allowProvisioningUpdates"
+      ]
+    }
+  }
+}

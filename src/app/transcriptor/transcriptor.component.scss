@@ -208,7 +208,7 @@
         }
 
         .tooltip {
-            visibility: hidden;
+            display: none;
             width: 120px;
             color: #fff;
             background-color: #016735;
@@ -218,12 +218,11 @@
             position: absolute;
             z-index: 1;
             bottom: 100%;
-            left: 50%;
-            margin-left: -60px;
+            right: 0;
         }
 
         &:hover>.tooltip {
-            visibility: visible;
+            display: block;
         }
     }
 }
@@ -250,6 +249,7 @@
             @media screen and (orientation:portrait) {
                 border-radius: 0;
                 width: auto;
+                padding: 20px 16px;
             }
         }
 
@@ -265,7 +265,12 @@
 
         .modal-body {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+
+            & > div {
+                margin-bottom: 5px;
+            }
 
             div.facebook-wrapper {
                 padding: 5px;
@@ -337,13 +342,13 @@
     padding: 10px;
     font-size: 1rem;
     position: absolute;
-    top: calc(95% - 10px);
+    bottom: 5%;
     left: 10px;
+    pointer-events: none;
 
     @media screen and (max-width: 697px) {
         @media screen and (orientation:portrait) {
-            width: 100%;
-            top: 95%;
+            right: 10px;
         }
     }
 }
