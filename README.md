@@ -29,7 +29,7 @@ The Angular 6 web layer and the Cordova Android layer need **different Node vers
 
 [cordova-android](https://github.com/apache/cordova-android) version 15.1.0 (targetSdk/compileSdk 36, minSdk 24, AGP 8.10.1, Gradle 8.14.2).
 
-[cordova-ios](https://github.com/apache/cordova-ios) version 4.5.5.
+[cordova-ios](https://github.com/apache/cordova-ios) version 8.1.x (Xcode on macOS required to build).
 
 Note: cordova-android 15 requires Java 17, Android SDK Platform 36 and Build-Tools 36.0.0
 ```
@@ -45,6 +45,23 @@ Example build of the Play Store bundle (with nvm):
 $ nvm use 10 && npm install && npx ng build --prod
 $ nvm use 22 && npx cordova@13.0.0 build android --release -- --packageType=bundle
 ```
+
+Example build for the App Store / TestFlight (on macOS with Xcode):
+```
+$ cp build.example.json build.json   # then fill in the signing settings
+$ nvm use 10 && npm install && npx ng build --prod
+$ nvm use 22 && npx cordova@13.0.0 build ios --release --device
+```
+
+### Project layout: common, Android and iOS
+Both stores ship from this single codebase; there are no per-platform branches.
+
+- **Common**: the Angular app in `src/` (built into `www/`), `angular.json`, the dependencies in `package.json`, and the top-level settings of `config.xml` (app id `es.andaluh.transcriptor`, version, intents, global preferences).
+- **Android**: `<platform name="android">` in `config.xml`, `res/icon/android` and `res/screen/android`, and the `android` section of `build.json`.
+- **iOS**: `<platform name="ios">` in `config.xml`, `res/icon/ios` and `res/screen/ios`, and the `ios` section of `build.json`.
+- **Platform-specific UI**: `src/main.ts` adds `platform-android`, `platform-ios` or `platform-browser` to `<html>`. Scope tweaks in CSS (`.platform-ios .foo { ... }`) instead of forking files.
+- **Generated, not versioned**: `platforms/`, `plugins/`, `www/` and `build.json` (signing secrets; copy it from `build.example.json`).
+- **Releases**: bump `version` (shared by both stores) and `android-versionCode` in `config.xml` together.
 
 ### Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
