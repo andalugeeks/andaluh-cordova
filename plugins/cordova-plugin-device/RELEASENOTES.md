@@ -20,6 +20,75 @@
 -->
 # Release Notes
 
+### 3.0.0 (Jun 05, 2024)
+
+**Breaking Changes:**
+
+* [GH-181](https://github.com/apache/cordova-plugin-device/pull/181) fix!: remove deprecated platforms
+* [GH-183](https://github.com/apache/cordova-plugin-device/pull/183) refactor(android)!: Remove unused code
+* [GH-200](https://github.com/apache/cordova-plugin-device/pull/200) fix(android)!: set platform requirement `>= 7.0.0`
+* [GH-201](https://github.com/apache/cordova-plugin-device/pull/201) fix(android)!: access Context through `webView.getContext()`
+
+**Features & Fixes:**
+
+* [GH-193](https://github.com/apache/cordova-plugin-device/pull/193) feat(ios): add bundled resources for privacy manifest
+* [GH-182](https://github.com/apache/cordova-plugin-device/pull/182) fix(electron): use correct engine for 2.1.0 in `package.json`
+
+**Chores:**
+
+* [GH-203](https://github.com/apache/cordova-plugin-device/pull/203) chore: rebuilt `package-lock.json` w/ version 3
+* [GH-202](https://github.com/apache/cordova-plugin-device/pull/202) chore: Use github links in `plugin.xml`
+* [GH-191](https://github.com/apache/cordova-plugin-device/pull/191) chore: update asf config
+* [GH-189](https://github.com/apache/cordova-plugin-device/pull/189) chore: Update `SUPPORT_QUESTION.md` template
+
+**CI & Docs:**
+
+* [GH-198](https://github.com/apache/cordova-plugin-device/pull/198) ci: update gh-action's workflow
+* [GH-180](https://github.com/apache/cordova-plugin-device/pull/180) ci: sync workflow with paramedic
+* [GH-175](https://github.com/apache/cordova-plugin-device/pull/175) ci(android): update java requirement for `cordova-android@11`
+* [GH-184](https://github.com/apache/cordova-plugin-device/pull/184) docs(android): correct model description
+* [GH-174](https://github.com/apache/cordova-plugin-device/pull/174) doc(android): clarify documentation and types for `sdkVersion` field
+
+### 2.1.0 (Apr 08, 2022)
+
+* [GH-167](https://github.com/apache/cordova-plugin-device/pull/167) feat(ios): detect if app is running on a macOS desktop with Apple Silicon
+* [GH-166](https://github.com/apache/cordova-plugin-device/pull/166) chore: rebuild `package-lock` v2
+* [GH-158](https://github.com/apache/cordova-plugin-device/pull/158) doc(ios): add `device.model` quirks
+* [GH-157](https://github.com/apache/cordova-plugin-device/pull/157) feat(android): `getInfo` response to include `sdkVersion`
+* [GH-156](https://github.com/apache/cordova-plugin-device/pull/156) doc(README): update `device.cordova` info
+* [GH-124](https://github.com/apache/cordova-plugin-device/pull/124) doc(README): various enhancments
+* [GH-154](https://github.com/apache/cordova-plugin-device/pull/154) chore(electron): fix `package.json` typo
+* [GH-152](https://github.com/apache/cordova-plugin-device/pull/152) fix(osx): rename classes to fix plugin
+* [GH-135](https://github.com/apache/cordova-plugin-device/pull/135) feat(electron): add support
+* [GH-146](https://github.com/apache/cordova-plugin-device/pull/146) ci(ios): update workflow w/ **iOS** 15
+* [GH-145](https://github.com/apache/cordova-plugin-device/pull/145) ci: add action-badge
+* [GH-144](https://github.com/apache/cordova-plugin-device/pull/144) ci: remove `travis` & `appveyor`
+* [GH-143](https://github.com/apache/cordova-plugin-device/pull/143) doc(android): Noted quirks on `serial` property
+* [GH-138](https://github.com/apache/cordova-plugin-device/pull/138) doc(android): Update information about `device.uuid`
+* [GH-141](https://github.com/apache/cordova-plugin-device/pull/141) ci: add gh-actions workflows
+* [GH-132](https://github.com/apache/cordova-plugin-device/pull/132) chore: clean up `package.json`
+* chore(asf): update git notification settings
+* Update CONTRIBUTING.md
+* [GH-122](https://github.com/apache/cordova-plugin-device/pull/122) refactor(`eslint`): use `cordova-eslint`
+* [GH-120](https://github.com/apache/cordova-plugin-device/pull/120) ci: updates Node.js versions
+* [GH-121](https://github.com/apache/cordova-plugin-device/pull/121) chore(npm): improve ignore list
+* [GH-119](https://github.com/apache/cordova-plugin-device/pull/119) chore: replaces bugs URL
+* [GH-109](https://github.com/apache/cordova-plugin-device/pull/109) Log error to `console`, not to `dialog` box
+* fix(types): remove version number
+
+### 2.0.3 (Jun 14, 2019)
+
+-   build: add .gitattributes to force LF (instead of possible CRLF on Windows) ([`02ae405`](https://github.com/apache/cordova-plugin-device/commit/02ae405))
+-   build: add .npmignore to remove unneeded files from npm package ([`8dbe703`](https://github.com/apache/cordova-plugin-device/commit/8dbe703))
+-   docs: remove outdated translations ([`db4e1f1`](https://github.com/apache/cordova-plugin-device/commit/db4e1f1))
+-   ci(travis): Remove android 4.4 that SauceLabs removed ([`594fa61`](https://github.com/apache/cordova-plugin-device/commit/594fa61))
+-   ci(travis): Update Travis CI configuration for new paramedic ([#97](https://github.com/apache/cordova-plugin-device/issues/97)) ([`db0ad32`](https://github.com/apache/cordova-plugin-device/commit/db0ad32))
+-   feat: update typings ([#90](https://github.com/apache/cordova-plugin-device/issues/90)) ([`52a0655`](https://github.com/apache/cordova-plugin-device/commit/52a0655), [`61ad76c`](https://github.com/apache/cordova-plugin-device/commit/61ad76c))
+-   chore(github): Add or update GitHub pull request and issue template ([`e213286`](https://github.com/apache/cordova-plugin-device/commit/e213286))
+-   docs: remove JIRA link ([`2d12d55`](https://github.com/apache/cordova-plugin-device/commit/2d12d55))
+-   ci(travis): also accept terms for android sdk `android-27` ([`f870c9b`](https://github.com/apache/cordova-plugin-device/commit/f870c9b))
+-   fix: [CB-14106](https://issues.apache.org/jira/browse/CB-14106) - device.model is different on simulator and on real device ([#80](https://github.com/apache/cordova-plugin-device/issues/80)) ([`d65cdf6`](https://github.com/apache/cordova-plugin-device/commit/d65cdf6))
+
 ### 2.0.2 (Apr 12, 2018)
 * [CB-13893](https://issues.apache.org/jira/browse/CB-13893) **iOS** delete `libz.tbd` from device plugin
 

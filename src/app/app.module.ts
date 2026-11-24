@@ -7,9 +7,8 @@ import { Routing } from './app.module.routing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-library.add(fas);
+// Note: no `library.add(fas)` here. No template uses <fa-icon>, and registering the
+// whole solid icon set added ~700 KB of JS to the bundle and the WebView heap.
 
 import { CommonModule } from './common/common.module';
 import { TranscriptorModule } from './transcriptor/transcritor.module';
